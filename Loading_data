@@ -10,14 +10,15 @@ import numpy as np
 
 torch.manual_seed(1)    # reproducible
 
-BATCH_SIZE = 1
+BATCH_SIZE = 3
 # BATCH_SIZE = 8
 
 x = np.random.rand(10, 9, 8)
 x = torch.from_numpy(x)
 y = torch.linspace(1, 10, 10)       # this is y data (torch tensor)
+z = torch.linspace(1, 10, 10)       # this is y data (torch tensor)
 
-torch_dataset = Data.TensorDataset(x, y, y)
+torch_dataset = Data.TensorDataset(x, y, z)
 loader = Data.DataLoader(
     dataset=torch_dataset,      # torch TensorDataset format
     batch_size=BATCH_SIZE,      # mini batch size
@@ -26,11 +27,11 @@ loader = Data.DataLoader(
 )
 
 def show_batch():
-    for epoch in range(3):   # train entire dataset 3 times
-        for step, (batch_x, batch_y, batch_y) in enumerate(loader):  # for each training step
+    for epoch in range(2):   # train entire dataset 3 times
+        for step, (batch_x, batch_y, batch_z) in enumerate(loader):  # for each training step
             # train your data...
             print('Epoch: ', epoch, '| Step: ', step, '| batch x: ',
-                  batch_x.numpy(), '| batch y: ', batch_y.numpy(), '| batch y: ', batch_y.numpy())
+                  batch_x.numpy(), '| batch y: ', batch_y.numpy(), '| batch z: ', batch_z.numpy())
 
 
 if __name__ == '__main__':
